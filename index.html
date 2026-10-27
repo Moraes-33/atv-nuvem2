@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Máquina de Piadas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bowlby+One&family=DM+Sans:opsz,wght@9..40,400;9..40,600;9..40,800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topo">
+  <div>
+    <h1>Máquina de Piadas</h1>
+    <p>Gire a manivela, abra o bilhete e guarde as melhores no seu pote.</p>
+  </div>
+  <div class="contagem" aria-label="Piadas guardadas no pote">
+    <b id="numPote">0</b>
+    no pote
+  </div>
+</header>
+
+<main>
+  <section class="lado-maquina" aria-label="Máquina de piadas">
+    <div class="chips" id="chipsSorteio" role="group" aria-label="Tipo de piada a sortear">
+      <button type="button" class="chip" data-tipo="" aria-pressed="true" style="--cor:#FFFFFF">Qualquer</button>
+      <button type="button" class="chip" data-tipo="general" aria-pressed="false" style="--cor:#FFD23F">Geral</button>
+      <button type="button" class="chip" data-tipo="knock-knock" aria-pressed="false" style="--cor:#FF7A66">Toc-toc</button>
+      <button type="button" class="chip" data-tipo="programming" aria-pressed="false" style="--cor:#5EE0A8">Programação</button>
+      <button type="button" class="chip" data-tipo="dad" aria-pressed="false" style="--cor:#BBA8FF">Tiozão</button>
+    </div>
+
+    <div class="maquina" id="maquina">
+      <div class="globo" id="globo" aria-hidden="true"></div>
+      <div class="corpo">
+        <button type="button" class="manivela" id="btnGirar" aria-label="Girar a manivela e sortear uma piada">
+          <span class="roda" aria-hidden="true"></span>
+          <span class="rotulo">Girar</span>
+        </button>
+        <div class="bandeja" aria-hidden="true">
+          <span class="cap-saida" id="capSaida"></span>
+        </div>
+      </div>
+    </div>
+
+    <article class="ticket" id="ticket" aria-live="polite">
+      <span class="selo" id="tipoAtual">Pronta para girar</span>
+      <p class="setup" id="setup">Gire a manivela para sortear a primeira piada.</p>
+
+      <div class="dobra" id="dobra">
+        <p class="resposta" id="resposta" aria-hidden="true"></p>
+        <div class="aba" aria-hidden="true">? ? ?</div>
+      </div>
+
+      <details class="original" id="boxOriginal" hidden>
+        <summary>Ver original em inglês</summary>
+        <p id="originalSetup"></p>
+        <p id="originalResposta"></p>
+      </details>
+
+      <div class="acoes">
+        <button type="button" class="botao" id="btnRevelar" disabled>Revelar resposta</button>
+        <button type="button" class="botao claro" id="btnSalvar" disabled>Guardar no pote</button>
+      </div>
+      <p class="msg" id="msgPalco"></p>
+    </article>
+  </section>
+
+  <section class="pote" aria-label="Piadas guardadas">
+    <div class="pote-topo">
+      <h2 id="tituloColecao">Meu pote</h2>
+      <button type="button" class="botao" id="btnNova">Nova piada</button>
+    </div>
+
+    <div class="chips" id="chipsColecao" role="group" aria-label="Filtrar o pote por tipo">
+      <button type="button" class="chip" data-tipo="" aria-pressed="true" style="--cor:#FFFFFF">Todas</button>
+      <button type="button" class="chip" data-tipo="general" aria-pressed="false" style="--cor:#FFD23F">Geral</button>
+      <button type="button" class="chip" data-tipo="knock-knock" aria-pressed="false" style="--cor:#FF7A66">Toc-toc</button>
+      <button type="button" class="chip" data-tipo="programming" aria-pressed="false" style="--cor:#5EE0A8">Programação</button>
+      <button type="button" class="chip" data-tipo="dad" aria-pressed="false" style="--cor:#BBA8FF">Tiozão</button>
+    </div>
+
+    <ul class="grade" id="lista"></ul>
+    <p class="msg" id="msgLista"></p>
+  </section>
+</main>
+
+<dialog id="dlg">
+  <form id="formPiada">
+    <h2 id="dlgTitulo">Nova piada</h2>
+    <div class="campo">
+      <label for="fSetup">Início da piada</label>
+      <textarea id="fSetup" required maxlength="300"></textarea>
+    </div>
+    <div class="campo">
+      <label for="fResposta">Resposta</label>
+      <textarea id="fResposta" required maxlength="300"></textarea>
+    </div>
+    <div class="campo">
+      <label for="fTipo">Tipo</label>
+      <select id="fTipo">
+        <option value="general">Geral</option>
+        <option value="knock-knock">Toc-toc</option>
+        <option value="programming">Programação</option>
+        <option value="dad">Tiozão</option>
+      </select>
+    </div>
+    <div class="campo">
+      <label for="fNota">Anotação (opcional)</label>
+      <input id="fNota" maxlength="120" placeholder="Ex.: funciona bem em aula">
+    </div>
+    <p class="msg" id="msgDlg"></p>
+    <div class="dlg-acoes">
+      <button type="button" class="botao claro" id="btnCancelar">Cancelar</button>
+      <button type="submit" class="botao" id="btnConfirmar">Cadastrar piada</button>
+    </div>
+  </form>
+</dialog>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>
